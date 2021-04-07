@@ -4,6 +4,7 @@
 #import <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 struct Int32List {
     int32_t *data;
@@ -33,6 +34,7 @@ void Int32List_add(struct Int32List *self, int32_t value) {
     if (self->size == self->capacity) {
         size_t newCapacity = 2 * self->capacity;
         int32_t *newData = calloc(newCapacity, sizeof(int32_t));
+        memcpy(newData, self->data, self->capacity * sizeof(int32_t));
         if (newData == 0) {
             fprintf(stderr, "Out of memory");
             exit(1);

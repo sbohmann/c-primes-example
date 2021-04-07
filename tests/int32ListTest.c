@@ -10,6 +10,7 @@ static void checkValue(int32_t value, void *context) {
         fprintf(stderr, "%d != expected value %d", value, expectedValue);
         exit(1);
     }
+    ++expectedValue;
 }
 
 int main() {
@@ -19,5 +20,10 @@ int main() {
     }
     Int32List_forEach(list, 0, checkValue);
     Int32List_delete(list);
+    int nextExpectedValue = 1000;
+    if (expectedValue != nextExpectedValue) {
+        fprintf(stderr, "next expected value %d != expected value %d", expectedValue, nextExpectedValue);
+        exit(1);
+    }
     return 0;
 }
